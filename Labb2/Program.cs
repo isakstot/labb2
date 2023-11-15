@@ -14,12 +14,12 @@ namespace Labb2
 
             while (running)
             {
-                Console.WriteLine("1. Add family members \n2. Print names of family members \n3. Print total age \n4. Print average age \n0. Exit");
+                Console.WriteLine("Pick an option: \n 1. Add family members \n 2. Print names of family members \n 3. Print total age \n 4. Print average age \n 0. Exit");
                 string menuOption = Console.ReadLine();
                 switch (menuOption)
                 {
                     case "1":
-                        
+
                         Console.WriteLine("How many people do you want to add?");
                         nOfPeople = Int32.Parse(Console.ReadLine());
                         person = new string[nOfPeople];
@@ -40,10 +40,11 @@ namespace Labb2
                             Console.WriteLine("You have not created added any family members");
                             break;
                         }
-                        else {
+                        else
+                        {
                             for (int i = 0; i < nOfPeople; i++)
                             {
-                                Console.WriteLine(person[i] + " är " + age[i] + " år gammal.");
+                                Console.WriteLine(person[i] + " is " + age[i] + " years old.");
                             }
                         }
                         break;
@@ -55,7 +56,8 @@ namespace Labb2
                         }
                         else
                         {
-                            CalculateTotal(age);
+                            int totalAge = CalculateTotal(age);
+                            Console.WriteLine($"Total age of all family members: {totalAge}");
                         }
                         break;
                     case "4":
@@ -66,7 +68,8 @@ namespace Labb2
                         }
                         else
                         {
-                            CalculateAverage(age);
+                            double averageAge = CalculateAverage(age);
+                            Console.WriteLine($"Average age of all family members: {averageAge:F2}");
                         }
                         break;
                     case "0":
@@ -76,38 +79,29 @@ namespace Labb2
                         Console.WriteLine("Invalid input");
                         break;
                 }
-
-                /*
-                    int totalAge = CalculateTotal(age);
-                    double averageAge = CalculateAverage(age);
-
-                    Console.WriteLine($"Sammanlagd ålder: {totalAge}");
-                    Console.WriteLine($"Medelålder: {averageAge:F2}");
-
-                */
+                //adds empty line after printing
+                Console.WriteLine("");
+            }
 
 
-
-                int CalculateTotal(int[] ages)
-                {
-                    int sum = 0;
-                    foreach (int age in ages)
-                    {
-                        sum += age;
-                    }
-                    return sum;
+            int CalculateTotal(int[] ages)
+            {
+                int sum = 0;
+                for (int i = 0; i < nOfPeople; i++) {
+                    sum += ages[i];
                 }
+                return sum;
+            }
 
-                double CalculateAverage(int[] ages)
+            double CalculateAverage(int[] ages)
+            {
+                double sum = 0;
+                for (int i = 0; i < nOfPeople; i++)
                 {
-                    double sum = 0;
-                    foreach (int age in ages)
-                    {
-                        sum += age;
-                    }
-                    sum = sum / ages.Length;
-                    return (double)sum;
+                    sum += ages[i];
                 }
+                sum = sum / nOfPeople;
+                return sum;
             }
         }
     }
